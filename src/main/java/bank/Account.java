@@ -44,6 +44,7 @@ public class Account {
     else{
       double newBalance = balance + amount;
       setBalance(newBalance);
+      DataSource.upateAccountBalance(id, newBalance);
     }
   }
 

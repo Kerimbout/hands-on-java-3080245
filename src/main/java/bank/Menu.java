@@ -26,7 +26,7 @@ public class Menu {
     System.out.print("Please Enter your Username :");
     String username = scanner.next();
 
-    System.out.println("Please Enter your Password :");
+    System.out.print("Please Enter your Password :");
     String password = scanner.next();
 
     Customer customer = null;
