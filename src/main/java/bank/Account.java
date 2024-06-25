@@ -34,4 +34,13 @@ public class Account {
   public void setBalance(double balance) {
     this.balance = balance;
   }
+
+  public void deposit(double amount){
+
+  }
+
+  public void withdraw(double amount) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'withdraw'");
+  }
 }
