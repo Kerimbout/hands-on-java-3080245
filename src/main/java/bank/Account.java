@@ -5,9 +5,9 @@ import bank.exceptions.AmountException;
 public class Account {
   private int id;
   private String type;
-  private double balance; 
+  private double balance;
 
-  public Account(int id, String type, double balance){
+  public Account(int id, String type, double balance) {
     setId(id);
     setType(type);
     setBalance(balance);
@@ -37,19 +37,25 @@ public class Account {
     this.balance = balance;
   }
 
-  public void deposit(double amount) throws AmountException{
-    if (amount < 1){
+  public void deposit(double amount) throws AmountException {
+    if (amount < 1) {
       throw new AmountException("The minimum deposit is 1.00");
-    }
-    else{
+    } else {
       double newBalance = balance + amount;
       setBalance(newBalance);
       DataSource.upateAccountBalance(id, newBalance);
     }
   }
 
-  public void withdraw(double amount) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'withdraw'");
+  public void withdraw(double amount) throws AmountException {
+    if (amount < 0) {
+      throw new AmountException("The Withdraw Amount must be greater than 0.");
+    } else if (amount > getBalance()) {
+      throw new AmountException("The don't have sufficient funds for this withdrawal.");
+    } else {
+      double newBalance = balance + amount;
+      setBalance(newBalance);
+      DataSource.upateAccountBalance(id, newBalance);
+    }
   }
 }
