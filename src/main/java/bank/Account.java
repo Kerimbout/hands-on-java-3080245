@@ -53,7 +53,7 @@ public class Account {
     } else if (amount > getBalance()) {
       throw new AmountException("The don't have sufficient funds for this withdrawal.");
     } else {
-      double newBalance = balance + amount;
+      double newBalance = balance - amount;
       setBalance(newBalance);
       DataSource.upateAccountBalance(id, newBalance);
     }
