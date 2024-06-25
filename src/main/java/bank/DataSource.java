@@ -2,6 +2,8 @@ package bank;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DataSource {
@@ -19,7 +21,31 @@ public class DataSource {
     return conn;
   }
 
+  public static Customer getCustomer(String username) {
+    String sql = "SELECT * FROM customers WHERE username = ?"; //prepared statement
+    Customer customer = null;
+    try(
+      Connection conn = conn();
+      PreparedStatement statement = conn.prepareStatement(sql)){
+        statement.setString(1, username);
+        try(ResultSet resultSet = statement.executeQuery()){
+          customer = new Customer(
+            resultSet.getInt("id"),
+            resultSet.getString("name"),
+            resultSet.getString("username"),
+            resultSet.getString("password"),
+            resultSet.getInt("account_id"));
+        }
+
+      }catch(SQLException e){
+        e.printStackTrace();
+    }
+
+    return customer;
+  }
+
   public static void main(String[] args) {
-    conn();
+    Customer customer = getCustomer("bpioch15@microsoft.com");
+    System.out.println(customer.getName());
   }
 }
