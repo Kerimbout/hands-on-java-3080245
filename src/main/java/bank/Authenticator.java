@@ -21,4 +21,5 @@ public class Authenticator {
   public static void logout(Customer customer){
     customer.setAuthenticated(false);
   }
+  
 }
